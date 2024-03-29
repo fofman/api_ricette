@@ -34,13 +34,15 @@ CREATE TABLE ricette(
 	tempo_preparazione INT,
 	porzioni INT,
 	testo TEXT,
-	livello INT
+	livello INT,
+    data_aggiunta DATETIME
 );
 
 CREATE TABLE immagini(
 	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-	id_ricetta INT REFERENCES ricette(id),
-	percorso VARCHAR(255)
+	id_ricetta INT,
+	percorso VARCHAR(255),
+	FOREIGN KEY (id_ricetta) REFERENCES ricette(id)
 );
 
 
