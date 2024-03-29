@@ -17,7 +17,14 @@ class Ricette extends Model
     protected $dateFormat = 'datetime';
     protected $createdField = 'data_aggiunta';
 
-    public function addRicetta($data) : bool
+    public function findRicette($where, $select = ['*']): array
+    {
+        $this->select($select);
+        $this->where($where);
+        return $this->findAll();
+    }
+
+    public function addRicetta($data): bool
     { // data deve essere un array associativo composto da tutti i campi necessari
         $this->trans_start();
         $this->insert($data);
@@ -32,13 +39,33 @@ class Ricette extends Model
         }
     }
 
-    public function updateRicetta($id, $data)
+    public function updateRicetta($id, $data): bool
     { //id ricetta e data con array associativo dei valori che si vogliono cambiare
+        $this->trans_start();
         $this->update($id, $data);
+        $this->trans_complete();
+        //controllo della transazione
+        if ($this->trans_status() === false) {
+            $this->trans_rollback();
+            return false;
+        } else {
+            $this->trans_commit();
+            return true;
+        }
     }
 
-    public function deleteRicetta()
+    public function deleteRicetta($id): bool
     {
-
+        $this->trans_start();
+        $this->delete($id);
+        $this->trans_complete();
+        //controllo della transazione
+        if ($this->trans_status() === false) {
+            $this->trans_rollback();
+            return false;
+        } else {
+            $this->trans_commit();
+            return true;
+        }
     }
 }
