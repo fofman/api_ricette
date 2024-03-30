@@ -22,45 +22,45 @@ class Cotture extends Model
 
     public function addCottura($data): bool
     { // data deve essere un array associativo composto da tutti i campi necessari
-        $this->trans_start();
+        $this->transStart();
         $this->insert($data);
-        $this->trans_complete();
+        $this->transComplete();
         //controllo della transazione
-        if ($this->trans_status() === false) {
-            $this->trans_rollback();
+        if ($this->transStatus() === false) {
+            $this->transRollback();
             return false;
         } else {
-            $this->trans_commit();
+            $this->transCommit();
             return true;
         }
     }
 
     public function updateCottura($id, $data): bool
     { //id ricetta e data con array associativo dei valori che si vogliono cambiare
-        $this->trans_start();
+        $this->transStart();
         $this->update($id, $data);
-        $this->trans_complete();
+        $this->transComplete();
         //controllo della transazione
-        if ($this->trans_status() === false) {
-            $this->trans_rollback();
+        if ($this->transStatus() === false) {
+            $this->transRollback();
             return false;
         } else {
-            $this->trans_commit();
+            $this->transCommit();
             return true;
         }
     }
 
     public function deleteCottura($id): bool
     {
-        $this->trans_start();
+        $this->transStart();
         $this->delete($id);
-        $this->trans_complete();
+        $this->transComplete();
         //controllo della transazione
-        if ($this->trans_status() === false) {
-            $this->trans_rollback();
+        if ($this->transStatus() === false) {
+            $this->transRollback();
             return false;
         } else {
-            $this->trans_commit();
+            $this->transCommit();
             return true;
         }
     }

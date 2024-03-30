@@ -17,6 +17,7 @@ class Ricette extends Model
     protected $useTimestamps = true;
     protected $dateFormat = 'datetime';
     protected $createdField = 'data_aggiunta';
+    protected $updatedField  = 'data_aggiunta';
 
     public function getRicetta($where, $select = ['*']): array
     {
@@ -25,47 +26,48 @@ class Ricette extends Model
         return $this->findAll();
     }
 
-    public function addRicetta($data): bool
+    public function addRicetta($data)
     { // data deve essere un array associativo composto da tutti i campi necessari
-        $this->trans_start();
-        $this->insert($data);
-        $this->trans_complete();
+
+        $this->transStart();
+        $id=$this->insert($data);
+        $this->transComplete();
         //controllo della transazione
-        if ($this->trans_status() === false) {
-            $this->trans_rollback();
+        if ($this->transStatus() === false) {
+            $this->transRollback();
             return false;
         } else {
-            $this->trans_commit();
-            return true;
+            $this->transCommit();
+            return $id;
         }
     }
 
     public function updateRicetta($id, $data): bool
     { //id ricetta e data con array associativo dei valori che si vogliono cambiare
-        $this->trans_start();
+        $this->transStart();
         $this->update($id, $data);
-        $this->trans_complete();
+        $this->transComplete();
         //controllo della transazione
-        if ($this->trans_status() === false) {
-            $this->trans_rollback();
+        if ($this->transStatus() === false) {
+            $this->transRollback();
             return false;
         } else {
-            $this->trans_commit();
+            $this->transCommit();
             return true;
         }
     }
 
     public function deleteRicetta($id): bool
     {
-        $this->trans_start();
+        $this->transStart();
         $this->delete($id);
-        $this->trans_complete();
+        $this->transComplete();
         //controllo della transazione
-        if ($this->trans_status() === false) {
-            $this->trans_rollback();
+        if ($this->transStatus() === false) {
+            $this->transRollback();
             return false;
         } else {
-            $this->trans_commit();
+            $this->transCommit();
             return true;
         }
     }

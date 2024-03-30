@@ -15,7 +15,7 @@ use Psr\Log\LoggerInterface;
  * BaseController provides a convenient place for loading components
  * and performing functions that are needed by all your controllers.
  * Extend this class in any new controllers:
- *     class Home extends BaseController
+ *     class Ricette extends BaseController
  *
  * For security be sure to declare any new methods as protected or private.
  */
@@ -36,7 +36,6 @@ abstract class BaseController extends Controller
      * @var array
      */
     protected $helpers = [];
-
     /**
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
@@ -52,6 +51,19 @@ abstract class BaseController extends Controller
         parent::initController($request, $response, $logger);
 
         // Preload any models, libraries, etc, here.
+        $this->modelCategorie = model('Categorie');
+        $this->modelCotture = model('Cotture');
+        $this->modelImmagini = model('Immagini');
+        $this->modelIngredienti = model('Ingredienti');
+        $this->modelPaesi = model('Paesi');
+        $this->modelPortate = model('Portate');
+        $this->modelRicette = model('Ricette');
+        $this->modelRicetteCategorie = model('RicetteCategorie');
+        $this->modelRicetteIngredienti = model('RicetteIngredienti');
+        $this->modelRicettePaesi = model('RicettePaesi');
+        $this->modelRicettePortate = model('RicettePortate');
+
+
 
         // E.g.: $this->session = \Config\Services::session();
     }
