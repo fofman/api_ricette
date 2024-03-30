@@ -8,6 +8,7 @@ class Ricette extends Model
 {
     protected $table = 'ricette';
     protected $primaryKey = 'id';
+    protected $useAutoIncrement = true;
     protected $returnType = 'object';
     protected $useSoftDeletes = false;
     protected $allowedFields = ['titolo', 'tempo_preparazione', 'porzioni', 'testo', 'livello', 'data_aggiunta'];
@@ -17,7 +18,7 @@ class Ricette extends Model
     protected $dateFormat = 'datetime';
     protected $createdField = 'data_aggiunta';
 
-    public function findRicette($where, $select = ['*']): array
+    public function getRicetta($where, $select = ['*']): array
     {
         $this->select($select);
         $this->where($where);
