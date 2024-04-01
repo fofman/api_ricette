@@ -7,5 +7,5 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/ricette/(:num)', 'Ricette::get/$1');
 $routes->post('/ricette', 'Ricette::post');
-$routes->put('/ricette', 'Ricette::put');
-$routes->delete('/ricette', 'Ricette::delete');
+$routes->patch('/ricette', 'Ricette::patch');
+$routes->delete('/ricette/(:num)', 'Ricette::delete/$1');

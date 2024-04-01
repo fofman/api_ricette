@@ -25,7 +25,7 @@ class Ricette extends BaseController
         }
     }
 
-    public function put()
+    public function patch()
     {
         $rawInput = $this->request->getBody();
         $jsonData = json_decode($rawInput);
@@ -36,12 +36,12 @@ class Ricette extends BaseController
         return true;
     }
 
-    public function delete()
+    public function delete($id)
     {
         $rawInput = $this->request->getBody();
         $jsonData = json_decode($rawInput);
         //operazioni su db
-        $ris = $this->modelRicette->delete($jsonData->id);
+        $ris = $this->modelRicette->delete($id);
         //gestione della transazione
         if ($ris == false) return $this->response->setStatusCode(422)->setJSON(["errore" => "Errore nella compilazione"]);
         return true;
