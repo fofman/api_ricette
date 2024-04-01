@@ -17,20 +17,24 @@ class Ricette extends Model
     protected $useTimestamps = true;
     protected $dateFormat = 'datetime';
     protected $createdField = 'data_aggiunta';
-    protected $updatedField  = 'data_aggiunta';
+    protected $updatedField = 'data_aggiunta';
 
-    public function getRicetta($where, $select = ['*']): array
+    public function getRicetta($where = false, $select = ['*'], $order = false, $limit = 0): array
     {
         $this->select($select);
-        $this->where($where);
-        return $this->findAll();
+        if ($where != false) {
+            $this->where($where);
+        }
+        if ($order != false) {
+            $this->orderBy($order);
+        }
+        return $this->findAll($limit);
     }
 
     public function addRicetta($data)
     { // data deve essere un array associativo composto da tutti i campi necessari
-
         $this->transStart();
-        $id=$this->insert($data);
+        $id = $this->insert($data);
         $this->transComplete();
         //controllo della transazione
         if ($this->transStatus() === false) {

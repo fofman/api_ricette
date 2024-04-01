@@ -20,6 +20,15 @@ class Paesi extends Model
         return $this->findAll();
     }
 
+    public function getPaeseOf($id)
+    {
+        $this->select('paesi.*');
+        $this->join('ricette_paesi', 'paesi.id = ricette_paesi.id_paese');
+        $this->join('ricette', 'ricette_paesi.id_ricetta = ricette.id');
+        $this->where('ricette.id', $id);
+        return $this->find();
+    }
+
     public function addPaese($data): bool
     { // data deve essere un array associativo composto da tutti i campi necessari
         $this->transStart();
