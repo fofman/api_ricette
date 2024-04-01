@@ -4,9 +4,9 @@ namespace App\Models;
 
 use \CodeIgniter\Model;
 
-class Tokens  extends Model
+class Tokens extends Model
 {
-    protected $table = 'ricette_portate';
+    protected $table = 'tokens';
     protected $primaryKey = 'token';
     protected $useAutoIncrement = true;
     protected $returnType = 'object';
