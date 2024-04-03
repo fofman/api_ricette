@@ -35,7 +35,7 @@ class Ricette extends BaseController
         $ris = $this->modelRicette->updateRicetta($jsonData->id, $jsonData->data);
         //gestione della transazione
         if ($ris == false) return $this->response->setStatusCode(422)->setJSON(["errore" => "Errore nella compilazione"]);
-        return true;
+        return $this->response->setJSON(true);
     }
 
     public function delete($id)
@@ -47,13 +47,13 @@ class Ricette extends BaseController
         //operazioni su db
         $ris = $this->modelRicette->delete($id);
         //gestione della transazione
-        //if ($ris == false) return $this->response->setStatusCode(422)->setJSON(["errore" => "Errore nella compilazione"]);
-        return true;
+        if ($ris == false) return $this->response->setStatusCode(422)->setJSON(["errore" => "Errore nella compilazione"]);
+        return $this->response->setJSON(true);
     }
 
     public function getRecent($limit)
     {
-        $ricette = $this->modelRicette->getRicetta(false, "*", "data_aggiunta DESC", $limit);
+        $ricette = $this->modelRicette->getRicetta(false, "id,titolo,tempo_preparazione,livello,data_aggiunta", "data_aggiunta DESC", $limit);
         return $this->response->setJSON($ricette);
     }
 }

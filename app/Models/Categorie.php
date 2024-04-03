@@ -4,7 +4,7 @@ namespace App\Models;
 
 use \CodeIgniter\Model;
 
-class Categorie extends Model
+class Categorie extends baseModel
 {
     protected $table = 'categorie';
     protected $primaryKey = 'id';
@@ -15,52 +15,20 @@ class Categorie extends Model
 
     public function getCategoria($where, $select = ['*']): array
     {
-        $this->select($select);
-        $this->where($where);
-        return $this->findAll();
+        return baseModel::getData($where, $select);
     }
-    public function addCategoria($data): bool
-    { // data deve essere un array associativo composto da tutti i campi necessari
-        $this->transStart();
-        $this->insert($data);
-        $this->transComplete();
-        //controllo della transazione
-        if ($this->transStatus() === false) {
-            $this->transRollback();
-            return false;
-        } else {
-            $this->transCommit();
-            return true;
-        }
+    public function addCategoria($data)
+    {
+        return baseModel::addData($data);
     }
 
     public function updateCategoria($id, $data): bool
-    { //id ricetta e data con array associativo dei valori che si vogliono cambiare
-        $this->transStart();
-        $this->update($id, $data);
-        $this->transComplete();
-        //controllo della transazione
-        if ($this->transStatus() === false) {
-            $this->transRollback();
-            return false;
-        } else {
-            $this->transCommit();
-            return true;
-        }
+    {
+        return baseModel::updateData($id,$data);
     }
 
     public function deleteCategoria($id): bool
     {
-        $this->transStart();
-        $this->delete($id);
-        $this->transComplete();
-        //controllo della transazione
-        if ($this->transStatus() === false) {
-            $this->transRollback();
-            return false;
-        } else {
-            $this->transCommit();
-            return true;
-        }
+        return baseModel::deleteData($id);
     }
 }
