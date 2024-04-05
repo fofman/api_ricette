@@ -20,6 +20,16 @@ class Portate extends Model
         return $this->findAll();
     }
 
+    public function getPortateOf($id)
+    {
+        $this->select('portate.*');
+        $this->join('ricette_portate', 'portate.id = ricette_portate.id_portata');
+        $this->join('ricette', 'ricette_portate.id_ricetta = ricette.id');
+        $this->where('ricette.id', $id);
+        return $this->findAll();
+    }
+
+
     public function addPortata($data): bool
     { // data deve essere un array associativo composto da tutti i campi necessari
         $this->transStart();

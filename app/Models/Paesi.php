@@ -20,7 +20,7 @@ class Paesi extends Model
         return $this->findAll();
     }
 
-    public function getPaeseOf($id)
+    public function getPaesiOf($id)
     {
         $this->select('paesi.*');
         $this->join('ricette_paesi', 'paesi.id = ricette_paesi.id_paese');

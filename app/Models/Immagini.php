@@ -20,6 +20,12 @@ class Immagini extends Model
         return $this->findAll();
     }
 
+    public function getImmaginiOf($id)
+    {
+        $this->where('id_ricetta', $id);
+        return $this->findAll();
+    }
+
     public function addImmagine($data): bool
     { // data deve essere un array associativo composto da tutti i campi necessari
         $this->transStart();
