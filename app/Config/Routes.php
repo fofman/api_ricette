@@ -22,3 +22,8 @@ $routes->get('/cotture/(:num)', 'Cotture::get/$1');
 $routes->post('/cotture', 'Cotture::post');
 $routes->patch('/cotture', 'Cotture::patch');
 $routes->delete('/cotture/(:num)', 'Cotture::delete/$1');
+//ROTTE PER IMMAGINI
+$routes->get('/immagini/(:num)', 'Immagini::get/$1');
+$routes->post('/immagini', 'Immagini::post');
+$routes->patch('/immagini', 'Immagini::patch');
+$routes->delete('/immagini/(:num)', 'Immagini::delete/$1');
