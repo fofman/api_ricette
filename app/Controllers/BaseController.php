@@ -59,6 +59,7 @@ abstract class BaseController extends Controller
         $this->modelPortate = model('Portate');
         $this->modelRicette = model('Ricette');
         $this->modelRicetteCategorie = model('RicetteCategorie');
+        $this->modelRicetteCotture = model('RicetteCotture');
         $this->modelRicetteIngredienti = model('RicetteIngredienti');
         $this->modelRicettePaesi = model('RicettePaesi');
         $this->modelRicettePortate = model('RicettePortate');

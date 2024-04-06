@@ -17,3 +17,8 @@ $routes->get('/categorie/(:num)', 'Categorie::get/$1');
 $routes->post('/categorie', 'Categorie::post');
 $routes->patch('/categorie', 'Categorie::patch');
 $routes->delete('/categorie/(:num)', 'Categorie::delete/$1');
+//ROTTE PER COTTURE
+$routes->get('/cotture/(:num)', 'Cotture::get/$1');
+$routes->post('/cotture', 'Cotture::post');
+$routes->patch('/cotture', 'Cotture::patch');
+$routes->delete('/cotture/(:num)', 'Cotture::delete/$1');

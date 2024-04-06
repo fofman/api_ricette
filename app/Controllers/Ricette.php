@@ -14,6 +14,7 @@ class Ricette extends BaseController
         $ricetta[0]->immagini = $this->modelImmagini->getImmaginiOf($id);
         $ricetta[0]->portate = $this->modelPortate->getPortateOf($id);
         $ricetta[0]->categorie = $this->modelCategorie->getCategorieOf($id);
+        $ricetta[0]->cotture = $this->modelCotture->getCottureOf($id);
         return $this->response->setJson($ricetta);
     }
 
@@ -55,8 +56,6 @@ class Ricette extends BaseController
 
     public function delete($id)
     {
-        $rawInput = $this->request->getBody();
-        $jsonData = json_decode($rawInput);
         //operazioni su db
         $ris = $this->modelRicette->delete($id);
         //gestione della transazione

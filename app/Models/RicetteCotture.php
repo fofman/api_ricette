@@ -4,32 +4,23 @@ namespace App\Models;
 
 use \CodeIgniter\Model;
 
-class Cotture extends Model
+class RicetteCotture extends Model
 {
-    protected $table = 'cotture';
+    protected $table = 'ricette_cotture';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $returnType = 'object';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['nome'];
+    protected $allowedFields = ['id_ricetta', 'id_cottura'];
 
-    public function getCottura($where, $select = ['*']): array
+    public function getRicettaCottura($where, $select = ['*']): array
     {
         $this->select($select);
         $this->where($where);
         return $this->findAll();
     }
 
-    public function getCottureOf($id)
-    {
-        $this->select('cotture.*');
-        $this->join('ricette_cotture', 'cotture.id = ricette_cotture.id_cottura');
-        $this->join('ricette', 'ricette_cotture.id_cottura = ricette.id');
-        $this->where('ricette.id', $id);
-        return $this->findAll();
-    }
-
-    public function addCottura($data): bool
+    public function addRicettaCottura($data): bool
     { // data deve essere un array associativo composto da tutti i campi necessari
         $this->transStart();
         $this->insert($data);
@@ -44,7 +35,7 @@ class Cotture extends Model
         }
     }
 
-    public function updateCottura($id, $data): bool
+    public function updateRicettaCottura($id, $data): bool
     { //id ricetta e data con array associativo dei valori che si vogliono cambiare
         $this->transStart();
         $this->update($id, $data);
@@ -59,7 +50,7 @@ class Cotture extends Model
         }
     }
 
-    public function deleteCottura($id): bool
+    public function deleteRicettaCottura($id): bool
     {
         $this->transStart();
         $this->delete($id);
@@ -73,5 +64,5 @@ class Cotture extends Model
             return true;
         }
     }
-    
+
 }

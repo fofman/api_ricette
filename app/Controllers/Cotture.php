@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Controllers;
-class Categorie extends BaseController
+class Cotture extends BaseController
 {
     public function get($id)
     {
-        $categoria = $this->modelCategorie->getCategoria("id=" . $id);
-        if (sizeof($categoria) == 0) return $this->response->setStatusCode(404)->setJSON(["errore" => "Risorsa non trovata"]);
-        return $this->response->setJson($categoria);
+        $cottura = $this->modelCotture->getCategoria("id=" . $id);
+        if (sizeof($cottura) == 0) return $this->response->setStatusCode(404)->setJSON(["errore" => "Risorsa non trovata"]);
+        return $this->response->setJson($cottura);
     }
 
     public function post()
@@ -15,11 +15,11 @@ class Categorie extends BaseController
         $rawInput = $this->request->getBody();
         $jsonData = json_decode($rawInput);
         //operazioni su db
-        $idCategoria = $this->modelCategorie->addCategoria($jsonData);
+        $idCottura = $this->modelCotture->addCategoria($jsonData);
         //gestione della transazione
-        if ($idCategoria == false) return $this->response->setStatusCode(422)->setJSON(["errore" => "Errore nella compilazione"]);
+        if ($idCottura == false) return $this->response->setStatusCode(422)->setJSON(["errore" => "Errore nella compilazione"]);
         else {
-            return $this->response->setJSON(["id" => $idCategoria]);
+            return $this->response->setJSON(["id" => $idCottura]);
         }
     }
 
@@ -27,7 +27,7 @@ class Categorie extends BaseController
         $rawInput = $this->request->getBody();
         $jsonData = json_decode($rawInput);
         //operazioni su db
-        $ris = $this->modelCategorie->updateCategoria($jsonData->id, $jsonData->data);
+        $ris = $this->modelCotture->updateCottura($jsonData->id, $jsonData->data);
         //gestione della transazione
         if ($ris == false) return $this->response->setStatusCode(422)->setJSON(["errore" => "Errore nella compilazione"]);
         return $this->response->setJSON(true);
@@ -35,7 +35,7 @@ class Categorie extends BaseController
 
     public function delete($id){
         //operazioni su db
-        $ris = $this->modelCategorie->delete($id);
+        $ris = $this->modelCotture->delete($id);
         //gestione della transazione
         if ($ris == false) return $this->response->setStatusCode(422)->setJSON(["errore" => "Errore nella compilazione"]);
         return $this->response->setJSON(true);
