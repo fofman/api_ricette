@@ -29,10 +29,10 @@ class Cotture extends Model
         return $this->findAll();
     }
 
-    public function addCottura($data): bool
+    public function addCottura($data)
     { // data deve essere un array associativo composto da tutti i campi necessari
         $this->transStart();
-        $this->insert($data);
+        $id = $this->insert($data);
         $this->transComplete();
         //controllo della transazione
         if ($this->transStatus() === false) {
@@ -40,7 +40,7 @@ class Cotture extends Model
             return false;
         } else {
             $this->transCommit();
-            return true;
+            return $id;
         }
     }
 

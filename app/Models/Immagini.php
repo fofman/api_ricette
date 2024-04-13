@@ -26,10 +26,10 @@ class Immagini extends Model
         return $this->findAll();
     }
 
-    public function addImmagine($data): bool
+    public function addImmagine($data)
     { // data deve essere un array associativo composto da tutti i campi necessari
         $this->transStart();
-        $this->insert($data);
+        $id = $this->insert($data);
         $this->transComplete();
         //controllo della transazione
         if ($this->transStatus() === false) {
@@ -37,7 +37,7 @@ class Immagini extends Model
             return false;
         } else {
             $this->transCommit();
-            return true;
+            return $id;
         }
     }
 

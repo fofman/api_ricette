@@ -20,10 +20,10 @@ class RicetteCategorie extends Model
         return $this->findAll();
     }
 
-    public function addRicettaCategoria($data): bool
+    public function addRicettaCategoria($data)
     { // data deve essere un array associativo composto da tutti i campi necessari
         $this->transStart();
-        $this->insert($data);
+        $id = $this->insert($data);
         $this->transComplete();
         //controllo della transazione
         if ($this->transStatus() === false) {
@@ -31,7 +31,7 @@ class RicetteCategorie extends Model
             return false;
         } else {
             $this->transCommit();
-            return true;
+            return $id;
         }
     }
 
