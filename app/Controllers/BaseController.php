@@ -63,8 +63,7 @@ abstract class BaseController extends Controller
         $this->modelRicetteIngredienti = model('RicetteIngredienti');
         $this->modelRicettePaesi = model('RicettePaesi');
         $this->modelRicettePortate = model('RicettePortate');
-
-
+        header("Access-Control-Allow-Origin: *");
 
         // E.g.: $this->session = \Config\Services::session();
     }
