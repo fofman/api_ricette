@@ -16,7 +16,7 @@ $routes->delete('/ricette/(:num)', 'Ricette::delete/$1');
 $routes->get('/ricette/paesi/(:num)', 'Paesi::getPaesiOf/$1');
 $routes->get('/ricette/ingredienti/(:num)', 'Ingredienti::getIngredientiOf/$1');
 $routes->get('/ricette/portate/(:num)', 'Portate::getPortateOf/$1');
-$routes->get('/ricette/cotture/(:num)', 'Portate::getCottureOf/$1');
+$routes->get('/ricette/cotture/(:num)', 'Cotture::getCottureOf/$1');
 //ROTTE PER INGREDIENTI
 $routes->get('/ingredienti/(:num)', 'Ingredienti::get/$1');
 $routes->get('/ingredienti', 'Ingredienti::getAll');
