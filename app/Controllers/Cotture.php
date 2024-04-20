@@ -5,7 +5,7 @@ class Cotture extends BaseController
 {
     public function get($id)
     {
-        $cottura = $this->modelCotture->getCategoria("id=" . $id);
+        $cottura = $this->modelCotture->getCottura("id=" . $id);
         if (sizeof($cottura) == 0) return $this->response->setStatusCode(404)->setJSON(["errore" => "Risorsa non trovata"]);
         return $this->response->setJson($cottura);
     }
