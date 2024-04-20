@@ -43,12 +43,12 @@ class Ricette extends BaseController
         }
     }
 
-    public function patch()
+    public function patch($id)
     {
         $rawInput = $this->request->getBody();
         $jsonData = json_decode($rawInput);
         //operazioni su db
-        $ris = $this->modelRicette->updateRicetta($jsonData->id, $jsonData->data);
+        $ris = $this->modelRicette->updateRicetta($id, $jsonData);
         //gestione della transazione
         if ($ris == false) return $this->response->setStatusCode(422)->setJSON(["errore" => "Errore nella compilazione"]);
         return $this->response->setJSON(true);
