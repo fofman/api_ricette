@@ -15,7 +15,7 @@ class Cotture extends BaseController
         $rawInput = $this->request->getBody();
         $jsonData = json_decode($rawInput);
         //operazioni su db
-        $idCottura = $this->modelCotture->addCategoria($jsonData);
+        $idCottura = $this->modelCotture->addCottura($jsonData);
         //gestione della transazione
         if ($idCottura == false) return $this->response->setStatusCode(422)->setJSON(["errore" => "Errore nella compilazione"]);
         else {
