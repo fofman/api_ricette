@@ -19,9 +19,8 @@ class Paesi extends BaseController
 
     public function getAll()
     {
-        $cottura = $this->modelPaesi->getPaese("1=1");
-        if (sizeof($cottura) == 0) return $this->response->setStatusCode(404)->setJSON(["errore" => "Risorsa non trovata"]);
-        return $this->response->setJson($cottura);
+        $paese = $this->modelPaesi->getPaese();
+        return $this->response->setJSON($paese);
     }
 
     public function post()

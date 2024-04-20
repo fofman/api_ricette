@@ -10,6 +10,12 @@ class Categorie extends BaseController
         return $this->response->setJson($categoria);
     }
 
+    public function getAll()
+    {
+        $categorie = $this->modelCategorie->getCategoria();
+        return $this->response->setJSON($categorie);
+    }
+
     public function post()
     {
         $rawInput = $this->request->getBody();

@@ -13,11 +13,16 @@ class Immagini extends Model
     protected $useSoftDeletes = false;
     protected $allowedFields = ['id_ricetta', 'percorso'];
 
-    public function getImmagine($where, $select = ['*']): array
+    public function getImmagine($where = false, $select = ['*'], $order = false, $limit = 0): array
     {
         $this->select($select);
-        $this->where($where);
-        return $this->findAll();
+        if ($where != false) {
+            $this->where($where);
+        }
+        if ($order != false) {
+            $this->orderBy($order);
+        }
+        return $this->findAll($limit);
     }
 
     public function getImmaginiOf($id)

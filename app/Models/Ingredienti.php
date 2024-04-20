@@ -13,11 +13,16 @@ class Ingredienti extends Model
     protected $useSoftDeletes = false;
     protected $allowedFields = ['nome', 'descrizione','quantitativo'];
 
-    public function getIngredienti($where, $select = ['*']): array
+    public function getIngredienti($where = false, $select = ['*'], $order = false, $limit = 0): array
     {
         $this->select($select);
-        $this->where($where);
-        return $this->findAll();
+        if ($where != false) {
+            $this->where($where);
+        }
+        if ($order != false) {
+            $this->orderBy($order);
+        }
+        return $this->findAll($limit);
     }
 
     public function getIngredientiOf($id)

@@ -10,6 +10,19 @@ class Cotture extends BaseController
         return $this->response->setJson($cottura);
     }
 
+    public function getCottureOf($id)
+    {
+        $cottura = $this->modelCotture->getCottureOf($id);
+        if (sizeof($cottura) == 0) return $this->response->setStatusCode(404)->setJSON(["errore" => "Risorsa non trovata"]);
+        return $this->response->setJson($cottura);
+    }
+
+    public function getAll()
+    {
+        $cotture = $this->modelCotture->getCottura();
+        return $this->response->setJSON($cotture);
+    }
+    
     public function post()
     {
         $rawInput = $this->request->getBody();

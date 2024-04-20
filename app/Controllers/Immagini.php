@@ -10,6 +10,12 @@ class Immagini extends BaseController
         return $this->response->setJson($cottura);
     }
 
+    public function getAll()
+    {
+        $immagini = $this->modelImmagini->getImmagine();
+        return $this->response->setJSON($immagini);
+    }
+
     public function post()
     {
         $rawInput = $this->request->getBody();

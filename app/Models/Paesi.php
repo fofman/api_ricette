@@ -13,11 +13,16 @@ class Paesi extends Model
   protected $useSoftDeletes = false;
   protected $allowedFields = ['nome'];
 
-    public function getPaese($where, $select = ['*']): array
+    public function getPaese($where = false, $select = ['*'], $order = false, $limit = 0): array
     {
         $this->select($select);
-        $this->where($where);
-        return $this->findAll();
+        if ($where != false) {
+            $this->where($where);
+        }
+        if ($order != false) {
+            $this->orderBy($order);
+        }
+        return $this->findAll($limit);
     }
 
     public function getPaesiOf($id)
