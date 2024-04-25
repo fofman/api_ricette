@@ -11,7 +11,7 @@ class Ricette extends BaseController
         if (sizeof($ricetta) == 0) return $this->response->setStatusCode(404)->setJSON(["errore" => "Risorsa non trovata"]);
         $ricetta[0]->ingredienti = $this->modelIngredienti->getIngredientiOf($id);
         $ricetta[0]->paesi = $this->modelPaesi->getPaesiOf($id);
-        $ricetta[0]->immagini = $this->modelImmagini->getImmaginiOf($id);
+        //$ricetta[0]->immagini = $this->modelImmagini->getImmaginiOf($id);
         $ricetta[0]->portate = $this->modelPortate->getPortateOf($id);
         $ricetta[0]->categorie = $this->modelCategorie->getCategorieOf($id);
         $ricetta[0]->cotture = $this->modelCotture->getCottureOf($id);
@@ -35,7 +35,23 @@ class Ricette extends BaseController
         $rawInput = $this->request->getBody();
         $jsonData = json_decode($rawInput);
         //operazioni su db
-        $idRicetta = $this->modelRicette->addRicetta($jsonData);
+        $idRicetta = $this->modelRicette->addRicetta($jsonData->ricetta);
+        //operazioni sulle tabelle intermedie
+        foreach ($jsonData->ingredienti as $x) {
+            $this->modelRicetteIngredienti->addRicettaIngrediente(["id_ricetta" => $idRicetta,"id_ingrediente"=>$x->id_ingrediente,"quantitativo"=>$x->quantitativo]);
+        }
+        foreach ($jsonData->paesi as $x) {
+            $this->modelRicettePaesi->addRicettaPaese(["id_ricetta" => $idRicetta,"id_paese"=>$x]);
+        }
+        foreach ($jsonData->portate as $x) {
+            $this->modelRicettePortate->addRicettaPortata(["id_ricetta" => $idRicetta,"id_portata"=>$x]);
+        }
+        foreach ($jsonData->categorie as $x){
+            $this->modelRicetteCategorie->addRicettaCategoria(["id_ricetta" => $idRicetta,"id_categoria"=>$x]);
+        }
+        foreach ($jsonData->cotture as $x) {
+            $this->modelRicetteCotture->addRicettaCottura(["id_ricetta" => $idRicetta,"id_cottura"=>$x]);
+        }
         //gestione della transazione
         if ($idRicetta == false) return $this->response->setStatusCode(422)->setJSON(["errore" => "Errore nella compilazione"]);
         else {

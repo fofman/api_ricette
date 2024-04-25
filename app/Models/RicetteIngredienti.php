@@ -11,7 +11,7 @@ class RicetteIngredienti extends Model
     protected $useAutoIncrement = true;
     protected $returnType = 'object';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['id_ricetta', 'id_ingrediente'];
+    protected $allowedFields = ['id_ricetta', 'id_ingrediente', 'quantitativo'];
 
     public function getRicettaIngrediente($where, $select = ['*']): array
     {
