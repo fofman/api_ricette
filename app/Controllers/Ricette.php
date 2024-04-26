@@ -38,7 +38,7 @@ class Ricette extends BaseController
         $idRicetta = $this->modelRicette->addRicetta($jsonData->ricetta);
         //operazioni sulle tabelle intermedie
         foreach ($jsonData->ingredienti as $x) {
-            $this->modelRicetteIngredienti->addRicettaIngrediente(["id_ricetta" => $idRicetta,"id_ingrediente"=>$x->id_ingrediente,"quantitativo"=>$x->quantitativo]);
+            $this->modelRicetteIngredienti->addRicettaIngrediente(["id_ricetta" => $idRicetta,"id_ingrediente"=>$x]);
         }
         foreach ($jsonData->paesi as $x) {
             $this->modelRicettePaesi->addRicettaPaese(["id_ricetta" => $idRicetta,"id_paese"=>$x]);

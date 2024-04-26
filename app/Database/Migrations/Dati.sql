@@ -14,13 +14,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Dump della struttura di tabella ricette.categorie
-CREATE TABLE IF NOT EXISTS `categorie` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- Dump dei dati della tabella ricette.categorie: ~7 rows (circa)
 INSERT INTO `categorie` (`id`, `nome`) VALUES
 	(1, 'Pizza'),
@@ -31,13 +24,6 @@ INSERT INTO `categorie` (`id`, `nome`) VALUES
 	(6, 'Vegano'),
 	(7, 'Dolci');
 
--- Dump della struttura di tabella ricette.cotture
-CREATE TABLE IF NOT EXISTS `cotture` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- Dump dei dati della tabella ricette.cotture: ~5 rows (circa)
 INSERT INTO `cotture` (`id`, `nome`) VALUES
 	(1, 'Al forno'),
@@ -46,16 +32,6 @@ INSERT INTO `cotture` (`id`, `nome`) VALUES
 	(4, 'Fritto'),
 	(5, 'Bollito');
 
--- Dump della struttura di tabella ricette.immagini
-CREATE TABLE IF NOT EXISTS `immagini` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_ricetta` int(11) DEFAULT NULL,
-  `percorso` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_ricetta` (`id_ricetta`),
-  CONSTRAINT `immagini_ibfk_1` FOREIGN KEY (`id_ricetta`) REFERENCES `ricette` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- Dump dei dati della tabella ricette.immagini: ~5 rows (circa)
 INSERT INTO `immagini` (`id`, `id_ricetta`, `percorso`) VALUES
 	(11, 1, 'images/pizza-margherita.jpg'),
@@ -63,14 +39,6 @@ INSERT INTO `immagini` (`id`, `id_ricetta`, `percorso`) VALUES
 	(13, 3, 'images/pollo-al-forno-con-patate.jpg'),
 	(14, 4, 'images/insalata-di-riso-con-verdure.jpg'),
 	(15, 5, 'images/tiramisu.jpg');
-
--- Dump della struttura di tabella ricette.ingredienti
-CREATE TABLE IF NOT EXISTS `ingredienti` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) DEFAULT NULL,
-  `descrizione` text DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella ricette.ingredienti: ~10 rows (circa)
 INSERT INTO `ingredienti` (`id`, `nome`, `descrizione`) VALUES
@@ -84,13 +52,6 @@ INSERT INTO `ingredienti` (`id`, `nome`, `descrizione`) VALUES
 	(8, 'Basilico', 'Foglie di basilico fresco'),
 	(9, 'Pepe nero', 'Pepe nero macinato'),
 	(10, 'Pollo', 'Pollo intero');
-
--- Dump della struttura di tabella ricette.paesi
-CREATE TABLE IF NOT EXISTS `paesi` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella ricette.paesi: ~11 rows (circa)
 INSERT INTO `paesi` (`id`, `nome`) VALUES
@@ -106,13 +67,6 @@ INSERT INTO `paesi` (`id`, `nome`) VALUES
 	(10, 'India'),
 	(12, 'Portogallo');
 
--- Dump della struttura di tabella ricette.portate
-CREATE TABLE IF NOT EXISTS `portate` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- Dump dei dati della tabella ricette.portate: ~5 rows (circa)
 INSERT INTO `portate` (`id`, `nome`) VALUES
 	(1, 'Antipasto'),
@@ -120,18 +74,6 @@ INSERT INTO `portate` (`id`, `nome`) VALUES
 	(3, 'Secondo piatto'),
 	(4, 'Contorno'),
 	(5, 'Dolce');
-
--- Dump della struttura di tabella ricette.ricette
-CREATE TABLE IF NOT EXISTS `ricette` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `titolo` varchar(255) NOT NULL,
-  `tempo_preparazione` int(11) DEFAULT NULL,
-  `porzioni` int(11) DEFAULT NULL,
-  `testo` text DEFAULT NULL,
-  `livello` int(11) DEFAULT NULL,
-  `data_aggiunta` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella ricette.ricette: ~6 rows (circa)
 INSERT INTO `ricette` (`id`, `titolo`, `tempo_preparazione`, `porzioni`, `testo`, `livello`, `data_aggiunta`) VALUES
@@ -142,18 +84,6 @@ INSERT INTO `ricette` (`id`, `titolo`, `tempo_preparazione`, `porzioni`, `testo`
 	(5, 'Tiramisù', 30, 6, 'Dolce al caffè con mascarpone e savoiardi.', 3, '2024-03-30 00:00:00'),
 	(16, 'Pizza Margherita', 30, 4, 'Impasto per pizza con pomodoro, mozzarella e basilico.', 1, '2024-03-30 21:09:17');
 
--- Dump della struttura di tabella ricette.ricette_categorie
-CREATE TABLE IF NOT EXISTS `ricette_categorie` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_ricetta` int(11) DEFAULT NULL,
-  `id_categoria` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_ricetta` (`id_ricetta`),
-  KEY `id_categoria` (`id_categoria`),
-  CONSTRAINT `ricette_categorie_ibfk_1` FOREIGN KEY (`id_ricetta`) REFERENCES `ricette` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `ricette_categorie_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `categorie` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- Dump dei dati della tabella ricette.ricette_categorie: ~6 rows (circa)
 INSERT INTO `ricette_categorie` (`id`, `id_ricetta`, `id_categoria`) VALUES
 	(1, 1, 1),
@@ -163,76 +93,27 @@ INSERT INTO `ricette_categorie` (`id`, `id_ricetta`, `id_categoria`) VALUES
 	(5, 4, 5),
 	(6, 5, 7);
 
--- Dump della struttura di tabella ricette.ricette_cotture
-CREATE TABLE IF NOT EXISTS `ricette_cotture` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_ricetta` int(11) DEFAULT NULL,
-  `id_cottura` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_ricetta` (`id_ricetta`),
-  KEY `id_cottura` (`id_cottura`),
-  CONSTRAINT `ricette_cotture_ibfk_1` FOREIGN KEY (`id_ricetta`) REFERENCES `ricette` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `ricette_cotture_ibfk_2` FOREIGN KEY (`id_cottura`) REFERENCES `cotture` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- Dump dei dati della tabella ricette.ricette_cotture: ~1 rows (circa)
 INSERT INTO `ricette_cotture` (`id`, `id_ricetta`, `id_cottura`) VALUES
 	(1, 1, 1);
 
--- Dump della struttura di tabella ricette.ricette_ingredienti
-CREATE TABLE IF NOT EXISTS `ricette_ingredienti` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_ricetta` int(11) DEFAULT NULL,
-  `id_ingrediente` int(11) DEFAULT NULL,
-  `quantitativo` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_ricetta` (`id_ricetta`),
-  KEY `id_ingrediente` (`id_ingrediente`),
-  CONSTRAINT `ricette_ingredienti_ibfk_1` FOREIGN KEY (`id_ricetta`) REFERENCES `ricette` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `ricette_ingredienti_ibfk_2` FOREIGN KEY (`id_ingrediente`) REFERENCES `ingredienti` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- Dump dei dati della tabella ricette.ricette_ingredienti: ~11 rows (circa)
-INSERT INTO `ricette_ingredienti` (`id`, `id_ricetta`, `id_ingrediente`, `quantitativo`) VALUES
-	(1, 1, 1, 1),
-	(2, 1, 2, 1),
-	(3, 1, 3, 1),
-	(4, 1, 4, 1),
-	(5, 1, 5, 1),
-	(6, 1, 6, 1),
-	(7, 1, 7, 1),
-	(8, 1, 8, 1),
-	(9, 4, 4, 1),
-	(10, 3, 4, 1),
-	(11, 3, 10, 1);
-
--- Dump della struttura di tabella ricette.ricette_paesi
-CREATE TABLE IF NOT EXISTS `ricette_paesi` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_ricetta` int(11) DEFAULT NULL,
-  `id_paese` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_ricetta` (`id_ricetta`),
-  KEY `id_paese` (`id_paese`),
-  CONSTRAINT `ricette_paesi_ibfk_1` FOREIGN KEY (`id_ricetta`) REFERENCES `ricette` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `ricette_paesi_ibfk_2` FOREIGN KEY (`id_paese`) REFERENCES `paesi` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `ricette_ingredienti` (`id`, `id_ricetta`, `id_ingrediente`) VALUES
+	(1, 1, 1),
+	(2, 1, 2),
+	(3, 1, 3),
+	(4, 1, 4),
+	(5, 1, 5),
+	(6, 1, 6),
+	(7, 1, 7),
+	(8, 1, 8),
+	(9, 4, 4),
+	(10, 3, 4),
+	(11, 3, 10);
 
 -- Dump dei dati della tabella ricette.ricette_paesi: ~1 rows (circa)
 INSERT INTO `ricette_paesi` (`id`, `id_ricetta`, `id_paese`) VALUES
 	(1, 1, 1);
-
--- Dump della struttura di tabella ricette.ricette_portate
-CREATE TABLE IF NOT EXISTS `ricette_portate` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_ricetta` int(11) DEFAULT NULL,
-  `id_portata` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_ricetta` (`id_ricetta`),
-  KEY `id_portata` (`id_portata`),
-  CONSTRAINT `ricette_portate_ibfk_1` FOREIGN KEY (`id_ricetta`) REFERENCES `ricette` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `ricette_portate_ibfk_2` FOREIGN KEY (`id_portata`) REFERENCES `portate` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella ricette.ricette_portate: ~0 rows (circa)
 

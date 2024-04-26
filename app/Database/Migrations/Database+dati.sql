@@ -27,7 +27,6 @@ CREATE TABLE IF NOT EXISTS `categorie` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella ricette.categorie: ~7 rows (circa)
-DELETE FROM `categorie`;
 INSERT INTO `categorie` (`id`, `nome`) VALUES
 	(1, 'Pizza'),
 	(2, 'Pasta'),
@@ -45,7 +44,6 @@ CREATE TABLE IF NOT EXISTS `cotture` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella ricette.cotture: ~5 rows (circa)
-DELETE FROM `cotture`;
 INSERT INTO `cotture` (`id`, `nome`) VALUES
 	(1, 'Al forno'),
 	(2, 'In padella'),
@@ -64,7 +62,6 @@ CREATE TABLE IF NOT EXISTS `immagini` (
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella ricette.immagini: ~5 rows (circa)
-DELETE FROM `immagini`;
 INSERT INTO `immagini` (`id`, `id_ricetta`, `percorso`) VALUES
 	(11, 1, 'images/pizza-margherita.jpg'),
 	(12, 2, 'images/spaghetti-al-pomodoro.jpg'),
@@ -81,7 +78,6 @@ CREATE TABLE IF NOT EXISTS `ingredienti` (
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella ricette.ingredienti: ~10 rows (circa)
-DELETE FROM `ingredienti`;
 INSERT INTO `ingredienti` (`id`, `nome`, `descrizione`) VALUES
 	(1, 'Farina', 'Farina di grano tenero tipo 00'),
 	(2, 'Acqua', 'Acqua naturale'),
@@ -102,7 +98,6 @@ CREATE TABLE IF NOT EXISTS `paesi` (
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella ricette.paesi: ~11 rows (circa)
-DELETE FROM `paesi`;
 INSERT INTO `paesi` (`id`, `nome`) VALUES
 	(1, 'Italia'),
 	(2, 'Francia'),
@@ -124,7 +119,6 @@ CREATE TABLE IF NOT EXISTS `portate` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella ricette.portate: ~5 rows (circa)
-DELETE FROM `portate`;
 INSERT INTO `portate` (`id`, `nome`) VALUES
 	(1, 'Antipasto'),
 	(2, 'Primo piatto'),
@@ -145,7 +139,6 @@ CREATE TABLE IF NOT EXISTS `ricette` (
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella ricette.ricette: ~6 rows (circa)
-DELETE FROM `ricette`;
 INSERT INTO `ricette` (`id`, `titolo`, `tempo_preparazione`, `porzioni`, `testo`, `livello`, `data_aggiunta`) VALUES
 	(1, 'Pizza Margherita', 60, 4, 'Impasto per pizza con pomodoro, mozzarella e basilico.', 1, '2024-03-30 21:17:07'),
 	(2, 'Spaghetti al pomodoro', 20, 4, 'Spaghetti con salsa di pomodoro fresco e basilico.', 1, '2024-03-30 00:00:00'),
@@ -167,7 +160,6 @@ CREATE TABLE IF NOT EXISTS `ricette_categorie` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella ricette.ricette_categorie: ~6 rows (circa)
-DELETE FROM `ricette_categorie`;
 INSERT INTO `ricette_categorie` (`id`, `id_ricetta`, `id_categoria`) VALUES
 	(1, 1, 1),
 	(2, 2, 2),
@@ -189,7 +181,6 @@ CREATE TABLE IF NOT EXISTS `ricette_cotture` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella ricette.ricette_cotture: ~1 rows (circa)
-DELETE FROM `ricette_cotture`;
 INSERT INTO `ricette_cotture` (`id`, `id_ricetta`, `id_cottura`) VALUES
 	(1, 1, 1);
 
@@ -198,7 +189,6 @@ CREATE TABLE IF NOT EXISTS `ricette_ingredienti` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_ricetta` int(11) DEFAULT NULL,
   `id_ingrediente` int(11) DEFAULT NULL,
-  `quantitativo` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_ricetta` (`id_ricetta`),
   KEY `id_ingrediente` (`id_ingrediente`),
@@ -207,19 +197,18 @@ CREATE TABLE IF NOT EXISTS `ricette_ingredienti` (
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella ricette.ricette_ingredienti: ~11 rows (circa)
-DELETE FROM `ricette_ingredienti`;
-INSERT INTO `ricette_ingredienti` (`id`, `id_ricetta`, `id_ingrediente`, `quantitativo`) VALUES
-	(1, 1, 1, 1),
-	(2, 1, 2, 1),
-	(3, 1, 3, 1),
-	(4, 1, 4, 1),
-	(5, 1, 5, 1),
-	(6, 1, 6, 1),
-	(7, 1, 7, 1),
-	(8, 1, 8, 1),
-	(9, 4, 4, 1),
-	(10, 3, 4, 1),
-	(11, 3, 10, 1);
+INSERT INTO `ricette_ingredienti` (`id`, `id_ricetta`, `id_ingrediente`) VALUES
+	(1, 1, 1),
+	(2, 1, 2),
+	(3, 1, 3),
+	(4, 1, 4),
+	(5, 1, 5),
+	(6, 1, 6),
+	(7, 1, 7),
+	(8, 1, 8),
+	(9, 4, 4),
+	(10, 3, 4),
+	(11, 3, 10);
 
 -- Dump della struttura di tabella ricette.ricette_paesi
 CREATE TABLE IF NOT EXISTS `ricette_paesi` (
@@ -234,7 +223,6 @@ CREATE TABLE IF NOT EXISTS `ricette_paesi` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella ricette.ricette_paesi: ~1 rows (circa)
-DELETE FROM `ricette_paesi`;
 INSERT INTO `ricette_paesi` (`id`, `id_ricetta`, `id_paese`) VALUES
 	(1, 1, 1);
 
@@ -251,7 +239,6 @@ CREATE TABLE IF NOT EXISTS `ricette_portate` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella ricette.ricette_portate: ~0 rows (circa)
-DELETE FROM `ricette_portate`;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

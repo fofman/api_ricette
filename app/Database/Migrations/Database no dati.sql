@@ -124,7 +124,6 @@ CREATE TABLE IF NOT EXISTS `ricette_ingredienti` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_ricetta` int(11) DEFAULT NULL,
   `id_ingrediente` int(11) DEFAULT NULL,
-  `quantitativo` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_ricetta` (`id_ricetta`),
   KEY `id_ingrediente` (`id_ingrediente`),

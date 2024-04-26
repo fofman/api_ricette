@@ -11,7 +11,7 @@ class Ingredienti extends Model
     protected $useAutoIncrement = true;
     protected $returnType = 'object';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['nome', 'descrizione','quantitativo'];
+    protected $allowedFields = ['nome', 'descrizione'];
 
     public function getIngredienti($where = false, $select = ['*'], $order = false, $limit = 0): array
     {
