@@ -27,7 +27,7 @@ class Ingredienti extends Model
 
     public function getIngredientiOf($id)
     {
-        $this->select('ingredienti.*,ricette_ingredienti.quantitativo');
+        $this->select('ingredienti.*');
         $this->join('ricette_ingredienti', 'ingredienti.id = ricette_ingredienti.id_ingrediente');
         $this->join('ricette', 'ricette_ingredienti.id_ricetta = ricette.id');
         $this->where('ricette.id', $id);
